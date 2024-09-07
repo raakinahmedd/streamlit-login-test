@@ -1,0 +1,37 @@
+
+
+
+
+
+
+
+
+def redirect_to_next_page():
+    st.experimental_set_query_params(page="next")
+
+query_params = st.query_params
+page = query_params.get("page", ["home"])[0] 
+
+if page == "home":
+
+    st.title("LOGIN PAGE")
+
+    dic = {
+        "name": st.text_input("Name"),
+        "age": st.number_input("Age")
+    }
+
+
+
+    if st.button("Submit"):
+        input_dara = json.dumps(dic, indent=4)
+        process = json.loads(input_dara)
+        if process["name"] == "raakin" and process["age"] == 23:
+            st.write("Success")
+            redirect_to_next_page()
+        else:
+            st.write("Invali User")
+
+elif page == "next":
+    st.title("Welcome to the Next Page!")
+    st.write("You have successfully logged in.")
